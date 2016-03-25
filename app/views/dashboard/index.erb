@@ -1,0 +1,86 @@
+
+<header class="row">
+  <h1 class="page-header">logged in!
+    <small>Brought to you by Johnny Labs</small>
+  </h1>
+</header>
+
+<div style="display: none;" class="delete-bucket">
+  <div class="form">
+    <form class="delete-bucket" action='/buckets/delete', method='post'>
+      <p>Are you sure?</p>
+      <input type="hidden" name="id" value="<%= params[:id] %>" />
+      <button class="delete-bucket-btn">Yes, please delete!</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="login-page" style="display: inline-block">
+
+  <div>
+    <div class="form">
+      <form class="login-form" action='/buckets/new', method='post'>
+        <input type="text" name="name" placeholder="Name your new bucket"/>
+        <button>Create</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% @user.buckets.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.each do |bucket| %>
+  <div class="login-page" style="display: inline-block">
+
+    <div class="form">
+
+      <!-- <input type="text" name="new_name" placeholder="New item"/> -->
+      <% bucket.items.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.each do |item| %>
+        <form class="item-form" action="/items/edit" method="post">
+          <input type="hidden" name="bucket_id" value="<%= bucket.id %>" />
+          <input type="hidden" name="id" value="<%= item.id %>" />
+          <input type="hidden" name="status" value="<%= item.status %>" />
+          
+          <div>
+            <input type="text" name="name" value="<%= item.name %>"/>
+            <input type="button" class="btn_submit" name="PUT" value="update" />
+            <input type="button" class="btn_submit" name="DELETE" value="delete" />
+            <input type="button" class="btn_submit" name="PUT" value="<%= item.status %>" />
+          </div>
+
+        </form>
+
+      <% end %>
+            
+    </div>
+
+    <form class="form" action="/buckets/update" method="post">
+      <!-- <button class="item-update">bucket rating</button> -->
+      <img src="../images/bucket.jpg" width="50" height="50" />
+      <img src="../images/bucket.jpg" width="50" height="50" />
+      <img src="../images/bucket.jpg" width="50" height="50" />
+      <img src="../images/bucket.jpg" width="50" height="50" />
+      <img src="../images/bucket.jpg" width="50" height="50" />
+      <input type="hidden" name="id" value="<%= bucket.id %>" />
+      <input type="button" class="delete-bucket-btn" value="delete" />
+
+
+    </form>
+
+  </div>
+
+<% end %>
+
+
+
+
+
+
+<!--Pop up box to create a new button-->
+<div style="display: none;" class="new-bucket">
+  <div class="form">
+    <form class="login-form" action='/buckets/new', method='post'>
+      <input type="text" name="name" placeholder="Name your new bucket"/>
+      <button>Create</button>
+    </form>
+  </div>
+</div>
