@@ -101,7 +101,7 @@ post '/buckets/update' do
 end
 
 delete '/buckets/delete' do
-  
+
   check_user
   get_bucket
   @bucket.destroy
@@ -166,4 +166,9 @@ delete '/items/delete' do
   @item.destroy
   redirect :'/dashboard'
 
+end
+
+get '/settings' do
+  check_user
+  erb :'settings/index'
 end
