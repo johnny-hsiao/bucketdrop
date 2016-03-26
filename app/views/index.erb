@@ -1,12 +1,16 @@
-<div class="col-md-12 col-lg-12">
-  <div class="main-img">
-    <div class="col-md-4 col-md-offset-8 login-page">
+<div class="main-img">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="display-name">
+        <h1>BUCKET DROP</h1>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
       <div class="form">
-        <form class="login-form" action='/login', method='post'>
+        <form class="login-form" action="/login", method="post">
           <% if session[:login_error] %>
             <p><%= session[:login_error] %></p>
           <% end %>
-
           <input type="text" name="username" placeholder="Username"/>
           <input type="password" name="password" placeholder="Password"/>
           <button>login</button>
@@ -16,5 +20,3 @@
     </div>
   </div>
 </div>
-
-

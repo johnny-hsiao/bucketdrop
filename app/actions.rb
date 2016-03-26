@@ -1,36 +1,9 @@
 require 'pry'
+require_relative 'helpers.rb'
 
 # Homepage (Root path)
 get '/' do
   erb :index
-end
-
-helpers do
-  def check_user
-    @user = User.find_by(id: session[:user_id])
-    if @user.nil?
-      redirect :'/'
-    end
-  end
-
-  def get_item
-    @item = Item.find_by(id: params[:id])
-    redirect :'/dashboard' unless @item
-  end
-
-  def get_bucket
-    @bucket = Bucket.find_by(id: params[:id])
-    redirect :'/dashboard' unless @bucket
-  end
-
-  def toggle_status(old_status)
-    case old_status
-    when "new"
-      "done"
-    else
-      "new"
-    end
-  end
 end
 
 post '/login' do
@@ -86,6 +59,7 @@ end
 
 get '/dashboard' do
   check_user
+  @new = params["name"]
   erb :'dashboard/index'
 end
 
@@ -123,40 +97,46 @@ post '/buckets/:id/new_item' do
   end
 end
 
-post '/items/edit' do
-  # binding.pry
-  # redirect :'/'
-  check_user
-  get_item
-  bucket_id = @item[:bucket_id]
-  @item[:name] = params[:name]
-  if @item.save
-    redirect :'/dashboard'
-  else
-    redirect :'/'
-  end
-end
+# post '/items/edit' do
+#   # binding.pry
+#   # redirect :'/'
+#   check_user
+#   get_item
+#   bucket_id = @item[:bucket_id]
+#   @item[:name] = params[:name]
+#   if @item.save
+#     redirect :'/dashboard'
+#   else
+#     redirect :'/'
+#   end
+# end
 
 put '/items/update' do
   check_user
   get_item
   @item[:name] = params[:name]
   @item.save
+  update_bucket(@item)
 end
 
-put '/items/:status' do
+put '/items/update_status' do
   check_user
   get_item
-  @item[:status] = toggle_status(params[:status])
+  toggle_status(@item)
   @item.save
+  update_bucket(@item)
 end
 
-# put '/items/new' do
-#   check_user
-#   get_item
-#   @item[:status] = toggle_status(params[:status])
-#   @item.save
-# end
+post '/items/new' do
+  check_user
+  get_bucket
+  @item = @bucket.items.new(name: params[:name])
+  @item.user = @user
+  if @item.save
+    update_bucket(@item)
+    erb :'dashboard/index'
+  end
+end
 
 
 delete '/items/delete' do
@@ -171,4 +151,23 @@ end
 get '/settings' do
   check_user
   erb :'settings/index'
+end
+
+post '/bucket/edit' do
+  check_user
+  get_item
+  bucket_id = @item[:bucket_id]
+  @item[:name] = params[:name]
+  if @item.save
+    
+    redirect :'/dashboard'
+  else
+    redirect :'/'
+  end
+end
+
+
+get '/test' do
+  @new = params[:name]
+  @new
 end

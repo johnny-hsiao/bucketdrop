@@ -1,0 +1,64 @@
+<!-- bucket name -->
+<div class="input-group bucketlist-title">
+  <input type="text" class="form-control bucket-title" aria-label="Title" value="<%= bucket.name %>" readonly/>
+</div>
+
+<!-- new item input field -->
+<div class="input-group item-field new-item">
+  <input type="text" class="form-control submit_on_enter" name="POST" data-method="post" data-path="new" aria-label="New Item" placeholder="Add to your list"/>
+</div>
+
+<!-- makes the bucket scrollable -->
+<div data-spy="scroll" class="input-group item-field">
+</div>
+
+
+
+<% bucket.items.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.each do |item| %>    
+  <div class="input-group item-field" data-id=<%=item.id%>>
+    
+
+
+    <!-- completed status button -->
+    <div class="input-group-btn">
+      <% if item.status == "done" %>
+        <button type="button" class="btn btn-default complete btn_submit" name="PUT" data-method="put" data-path="update_status" aria-label="done" style="background: #f2f2f2">
+          <span class="glyphicon glyphicon-ok-circle"></span>
+        </button>
+      <% else %>
+        <button type="button" class="btn btn-default complete btn_submit" name="PUT" data-method="put" data-path="update_status" aria-label="done">
+          <span class="glyphicon glyphicon-ok-circle"></span>
+        </button>
+      <% end %>
+    </div>
+
+
+
+    <!-- item input field -->
+    <% if item.status == "done" %>
+      <input type="text" style="text-decoration: line-through;" class="form-control submit_on_enter" name="PUT" data-method="put" data-path="update" aria-label="Text input with multiple buttons" value="<%= item.name %>"/>
+    <% else %>
+      <input type="text" class="form-control submit_on_enter" name="PUT" data-method="put" data-path="update" aria-label="Text input with multiple buttons" value="<%= item.name %>"/>
+    <% end %>
+
+
+
+    <!-- update and delete button -->
+    <div class="input-group-btn">
+      <button type="button" class="btn btn-default update btn_submit" name="PUT" data-method="put" data-path="update" aria-label="update">
+        <span class="glyphicon glyphicon-upload"></span>
+      </button>
+      <button type="button" class="btn btn-default delete btn_submit" name="DELETE" data-method="delete" data-path="delete" aria-label="delete">
+        <span class="glyphicon glyphicon-remove-circle"></span>
+      </button>
+    </div>
+
+  </div>
+<% end %>
+
+
+
+<!-- delete bucket button -->
+<div class="bucklist-footer">
+  <button class="bucket-delete">DELETE BUCKET</button>
+</div>

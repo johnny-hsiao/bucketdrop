@@ -1,9 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Exo+2);
 
-body {
-  padding-top: 20px;
-  margin: 0px 0px 0px;
-}
 
 /* GENERIC */
 
@@ -11,8 +8,7 @@ body {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 360px;
-  padding: 45px;
+  margin: 0 auto;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -87,7 +83,7 @@ button {
   margin-right: 0px;
 }
 
-/* HEADER & FOOTER */
+/* NAV BAR & FOOTER */
 
 .navbar-inverse {
   padding: 15px;
@@ -118,10 +114,15 @@ button {
 
 /* HOME PAGE */
 
+.main-content {
+  position: relative;
+  padding-top: 80px;
+  min-height: calc(100vh - 71px);
+}
+
 .main-img {
   width: 100%;
-  min-height: 611px;
-  max-height: 1000px;
+  height: calc(100vh - 153px);
 }
 
 .main-img::after {
@@ -140,48 +141,99 @@ button {
   background-size: cover;
 }
 
-.login-page .form {
-  margin-top: 150px;
+.main-img .form {
+  margin: 85px auto 0;
+  padding: 45px;
+  width: 360px;
 }
 
+.display-name {
+  margin-top: 35px;
+  padding-right: 60px;
+  text-align: right;
+  color: #2C3E50;
+  opacity: 0.8;
+}
+
+.display-name > h1 {
+  font-family: "Exo 2", sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+}
 
 /* DASHBOARD PAGE */
 
+ .row.dashboard-background {
+  background-color: #e6e6e6;
+}
+
 .dashboard-page {
-  margin-top: 120px;
-  margin-bottom: 0px;
+  margin-top: 80px;
 }
 
 /* BUCKETS */
 
-.bucketlist-title {
+.create-bucketlist-title {
+  margin-top: 90px;
+  margin-bottom: 40px;
+  padding: 10px 0;
   width: 100%;
-  outline:none; 
-  border:none; 
-  border-style: none;
-  border-bottom: 1px solid black; 
+  background: #f2f2f2;
+  box-sizing: border-box;
+  font-size: 20px;
 }
 
+.form-control.new-bucket-title {
+  font-family: "Roboto", sans-serif;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2C3E50;
+}
+
+.create-bucket-form {
+  height: 400px; 
+  overflow-y: scroll;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 80px;
+  margin-right: 80px;
+  box-shadow: none;
+  background-color: transparent;
+  opacity: 1.0;
+  padding: 20px;
+  max-width: 450px;
+  background: white;
+  z-index: 1;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.bucketlist-title {
+  width: 100%;
+  border-bottom: 1px solid #2C3E50;
+}
 
 .form-control.bucket-title {
   font-family: "Roboto", sans-serif;
   background: transparent;
-  width: 100%;
-  border: 0;
-  margin: 0 0 20px;
-  font-size: 14px;
-  outline:none; 
-  border-style: none;
   box-shadow: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #2C3E50;
 }
 
-.new-item {
+.item-field.new-item {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: none;
   width: 100%;
   border: 0;
-  margin: 0 0 20px;
+  margin: 20px 0 20px;
   box-sizing: border-box;
   font-size: 14px;
 }
@@ -204,7 +256,6 @@ button {
   z-index: 1;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-
 
 .item-field {
   margin-top: 10px;
@@ -236,17 +287,48 @@ button {
   background: #e60000;
 }
 
+.bucket-delete {
+  font-size: 10px;
+  margin-top: 35px;
+  font-family: "Roboto", sans-serif;
+  background-color: #cc0000;
+  float: right;
+}
+
+.bucket-delete {
+  font-size: 10px;
+  margin-top: 35px;
+  font-family: "Roboto", sans-serif;
+  background-color: #cc0000;
+  float: right;
+}
+
+button.create-bucket-delete {
+  font-size: 12px;
+  margin-left: 120px;
+  margin-top: 50px;
+  font-family: "Roboto", sans-serif;
+  background-color: #43A047;
+  padding: 20px 30px;
+}
+
+button.create-bucket-delete:hover {
+  background: #4CAF50;
+}
 
 /* REGISTRATION PAGE */
 
 .registration-page {
-  padding-left: 50px;
+  margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .registration-page .form {
+  max-width: 360px;
   box-shadow: none;
   background-color: transparent;
   opacity: 1.0;
+  margin: auto;
 }
 
 .registration-page .form input {
@@ -254,7 +336,6 @@ button {
 }
 
 .registration-title {
-  margin-top: 50px;
   margin-bottom: 35px;
   padding-bottom: 10px;
   color: #2C3E50;
@@ -262,7 +343,7 @@ button {
   font-family: "Roboto", sans-serif;
   font-size: 22px;
   font-weight: bold;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 .registration-label {
@@ -292,18 +373,53 @@ button {
   background-size: cover;  
 }
 
+/* RE-DIRECTION PAGE */
+
+.redirect-message {
+  margin-top: 400px;
+  text-align: center;
+  color: #2C3E50;
+  opacity: 0.9;
+}
+
+.redirect-message > h3 {
+  font-family: "Exo 2", sans-serif;
+}
+
+.redirection-img {
+  width: 100%;
+}
+
+.redirection-img::after {
+  display: block;
+  opacity: 0.40;
+  content: "";
+  background: url('../images/redirection.png') no-repeat center center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+
+
 /* SETTINGS PAGE */
 
-.settings-page {
-  margin-top: 30px;
-  padding-left: 50px;
+.settings-form {
+  margin: 60px 0;
 }
 
 .settings-page .form {
-  margin-bottom: 20px;
+  max-width: 360px;
   box-shadow: none;
   background-color: transparent;
   opacity: 1.0;
+  margin: auto;
 }
 
 .settings-page .form input {
@@ -311,6 +427,7 @@ button {
 }
 
 .settings-title {
+  margin-top: 30px;
   margin-bottom: 35px;
   padding-bottom: 10px;
   color: #2C3E50;
@@ -318,7 +435,7 @@ button {
   font-family: "Roboto", sans-serif;
   font-size: 22px;
   font-weight: bold;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 .settings-label {
@@ -346,4 +463,8 @@ button {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;  
+}
+
+.setting-img .form {
+  margin: auto;
 }

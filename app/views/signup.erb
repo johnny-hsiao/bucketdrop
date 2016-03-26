@@ -1,12 +1,13 @@
-<div class="col-md-12 col-lg-12">
-  <div class="registration-img">
+<div class="registration-img">
+  <div class="row">
 
-    <div class="col-md-4 col-md-offset-4 registration-page">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-m-4 col-m-offset-4 registration-page">
       <% if session[:signup_error_missing_fields] %>
         <p><%= session[:signup_error_missing_fields] %></p>
       <% elsif session[:password_match_error] %>
         <p><%= session[:password_match_error] %></p>
       <% end %>
+      
       <div class="form">
         <form class="registration-form" action='/signup' method='post'>
           <h2 class="registration-title">SIGN UP</h2>

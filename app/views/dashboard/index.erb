@@ -1,106 +1,76 @@
-<div style="display: none;" class="delete-bucket">
-  <div class="form">
-    <form class="delete-bucket" action='/buckets/delete', method='post'>
-      <p>Are you sure?</p>
-      <input type="hidden" name="id" value="<%= params[:id] %>" />
-      <button class="delete-bucket-btn">Yes, please delete!</button>
+<div class="row dashboard-background">
+  <div class="dashboard-page col-md-10 col-md-offset-1">
+
+
+
+    <!-- create a new bucket form -->
+    <form class="create-bucket-form" action="/items" method="post">
+
+      <div class="input-group create-bucketlist-title">
+        <input type="text" class="form-control bucket-title" aria-label="Title" placeholder="BUCKET TITLE HERE" />
+      </div>
+      
+      <div class="create-bucklist-footer">
+        <button class="create-bucket-delete">CREATE BUCKET</button>
+      </div>
+
     </form>
-  </div>
-</div>
 
 
-<div class="login-page" style="display: inline-block">
 
-  <div>
-    <div class="form">
-      <form class="login-form" action='/buckets/new', method='post'>
-        <input type="text" name="name" placeholder="Name your new bucket"/>
-        <button>Create</button>
+    <!-- generates a bucket form for each of the user's bucket -->
+    <% @user.buckets.to_a.sort { |a,b| b.created_at <=> a.created_at }.each do |bucket| %>
+      <form class="bucket-form" action="/bucket/update" data-bucketid=<%= bucket.id %> method="post">
+          <%= erb :'dashboard/_bucket_form', locals: {bucket: bucket} %>
       </form>
-    </div>
-  </div>
-</div>
-
-<% @user.buckets.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.each do |bucket| %>
-<div class="dashboard-page col-md-10 col-md-offset-1">
-
-  <form class="bucket-form" action="/items" method="post">
-
-    <div class="input-group bucketlist-title">
-      <input type="text" class="form-control bucket-title" aria-label="Title" placeholder="BUCKET NAME" readonly/>
-    </div>
-
-    <div class="input-group new-item">
-      <input type="text" class="form-control" aria-label="New Item"/>
-    </div>
-
-    <div data-spy="scroll" class="input-group item-field">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default complete" aria-label="Complete">
-          <span class="glyphicon glyphicon-ok-circle"></span>
-        </button>
-      </div>
-      <input type="text" class="form-control" aria-label="Text input with multiple buttons"/>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default update" aria-label="Update">
-          <span class="glyphicon glyphicon-upload"></span>
-        </button>
-        <button type="button" class="btn btn-default delete" aria-label="Delete">
-          <span class="glyphicon glyphicon-remove-circle"></span>
-        </button>
-      </div>
-    </div>
-
-    <% bucket.items.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.each do |item| %>
-        
-      <div class="input-group item-field">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-default complete" aria-label="Complete">
-            <span class="glyphicon glyphicon-ok-circle"></span>
-          </button>
-        </div>
-        <input type="text" class="form-control" aria-label="Text input with multiple buttons" value="<%= item.name %>"/>
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-default update" aria-label="Update">
-            <span class="glyphicon glyphicon-upload"></span>
-          </button>
-          <button type="button" class="btn btn-default delete" aria-label="Delete">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </button>
-        </div>
-      </div>
-
     <% end %>
 
-  </form>
-</div>
-            
-<!-- 
-    <form class="form" action="/buckets/update" method="post">
-      <img src="../images/bucket.jpg" width="50" height="50" />
-      <img src="../images/bucket.jpg" width="50" height="50" />
-      <img src="../images/bucket.jpg" width="50" height="50" />
-      <img src="../images/bucket.jpg" width="50" height="50" />
-      <img src="../images/bucket.jpg" width="50" height="50" />
-      <input type="hidden" name="id" value="<%= bucket.id %>" />
-      <input type="button" class="delete-bucket-btn" value="delete" />
-    </form> -->
-
-  
-
-<% end %>
 
 
-
-
-
-
-<!--Pop up box to create a new button-->
-<div style="display: none;" class="new-bucket">
-  <div class="form">
-    <form class="login-form" action='/buckets/new', method='post'>
-      <input type="text" name="name" placeholder="Name your new bucket"/>
-      <button>Create</button>
-    </form>
   </div>
 </div>
+
+
+
+
+
+<script>
+  $('.btn_submit').click(function(ev){
+
+    ev.preventDefault();
+
+    var bucketID = $(this).closest('.bucket-form').data('bucketid');
+    var itemID = $(this).closest('.input-group.item-field').data('id');
+    var itemName = $(this).closest('.input-group.item-field').children('input').val();
+    var requestMethod = $(this).data('method');
+    var requestPath = $(this).data('path');
+    var formdata = {"id": itemID, "name": itemName, "bucket_id": bucketID};
+
+    $.ajax(`/items/${requestPath}`, {method: requestMethod, data: formdata})
+      .done(function(result){
+        window.location.href = "/dashboard";
+    });
+  });
+
+
+  $('.submit_on_enter').keydown(function(ev) {
+    if (event.keyCode == 13) {
+      ev.preventDefault();
+      var bucketID = $(this).closest('.bucket-form').data('bucketid');
+      var itemID = $(this).closest('.input-group.item-field').data('id');
+      var itemName = $(this).closest('.input-group.item-field').children('input').val();
+      
+      var requestMethod = $(this).data('method');
+      var requestPath = $(this).data('path');
+      var formdata = {"id": itemID, "name": itemName, "bucket_id": bucketID};
+
+      $.ajax(`/items/${requestPath}`, {method: requestMethod, data: formdata})
+        .done(function(result){
+
+          window.location.href = "/dashboard";
+      });
+    }
+  });
+
+
+</script>
