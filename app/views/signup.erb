@@ -2,15 +2,23 @@
   <div class="row">
 
     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-m-4 col-m-offset-4 registration-page">
-      <% if session[:signup_error_missing_fields] %>
-        <p><%= session[:signup_error_missing_fields] %></p>
-      <% elsif session[:password_match_error] %>
-        <p><%= session[:password_match_error] %></p>
-      <% end %>
+
       
       <div class="form">
         <form class="registration-form" action='/signup' method='post'>
           <h2 class="registration-title">SIGN UP</h2>
+
+          <% if @user && @user.errors.any? %>
+            <div>
+              <strong>Some issues with your entries, please fix them:</strong>
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+           </div>
+
+          <% end %>
           <input type="text" name="first_name" placeholder="First name" value="<%= @user.first_name %>" />
           <input type="text" name="last_name" placeholder="Last name" value="<%= @user.last_name %>" />
           <input type="text" name="email" placeholder="Email" value="<%= @user.email %>" />

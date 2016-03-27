@@ -65,9 +65,10 @@ end
 
 post '/buckets/new' do
   check_user
-  @bucket = @user.buckets.new(name: params[:name])
+  @bucket = Bucket.new(name: params[:name])
+  @bucket.user = @user
   if @bucket.save
-    erb :'dashboard/index'
+    redirect :'/dashboard'
   end
 end
 
@@ -83,33 +84,6 @@ delete '/buckets/delete' do
   redirect :'/dashboard'
 end
 
-post '/buckets/:id/new_item' do
-  # redirect :'/'
-  check_user
-  puts params
-  if params[:name]
-    bucket = Bucket.find_by(id: params[:bucket_id])
-    item = bucket.items.new(name: params[:name])
-    item.save
-    erb :'dashboard/index'
-  else
-    redirect :'/'
-  end
-end
-
-# post '/items/edit' do
-#   # binding.pry
-#   # redirect :'/'
-#   check_user
-#   get_item
-#   bucket_id = @item[:bucket_id]
-#   @item[:name] = params[:name]
-#   if @item.save
-#     redirect :'/dashboard'
-#   else
-#     redirect :'/'
-#   end
-# end
 
 put '/items/update' do
   check_user
@@ -148,26 +122,37 @@ delete '/items/delete' do
 
 end
 
+
+### bucket requests ###
+put '/items/bucket_title' do
+  check_user
+  get_bucket
+  @bucket[:name] = params[:name]
+  @bucket.updated_at = Time.now
+  @bucket.save
+end
+
+delete '/items/delete_bucket' do
+  check_user
+  get_bucket
+  @bucket.destroy
+end
+
+
+### SETTINGS REQUESTS ###
 get '/settings' do
   check_user
   erb :'settings/index'
 end
 
-post '/bucket/edit' do
+put '/settings/update_username_password' do
   check_user
-  get_item
-  bucket_id = @item[:bucket_id]
-  @item[:name] = params[:name]
-  if @item.save
-    
-    redirect :'/dashboard'
-  else
-    redirect :'/'
-  end
+  session[:settings_username_update] = change_username(params[:username])
+  session[:settings_password_update] = change_password(params[:old_password], params[:new_password], params[:confirmed_password])
 end
 
 
-get '/test' do
-  @new = params[:name]
-  @new
+get '/friends' do
+  erb :'friends/index'
 end
+

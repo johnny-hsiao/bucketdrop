@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 @import url(https://fonts.googleapis.com/css?family=Exo+2);
 
-
 /* GENERIC */
 
 .form {
@@ -161,9 +160,16 @@ button {
   font-weight: bold;
 }
 
+p.login-error {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  padding-bottom: 15px;
+}
+
 /* DASHBOARD PAGE */
 
- .row.dashboard-background {
+ .dashboard-background {
   background-color: #e6e6e6;
 }
 
@@ -194,7 +200,7 @@ button {
 }
 
 .create-bucket-form {
-  height: 400px; 
+  height: 400px;
   overflow-y: scroll;
   width: 100%;
   position: relative;
@@ -227,7 +233,7 @@ button {
   color: #2C3E50;
 }
 
-.item-field.new-item {
+.new-item {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: none;
@@ -264,27 +270,34 @@ button {
 /*BUCKET FORM BUTTONS */
 
 .complete {
+  border: none;
   background: #43A047;
 }
 
 .complete:hover {
   background: #4CAF50;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .update {
+  border: none;
   background: #e6b800;
 }
 
 .update:hover {
+  border: none;
   background: #ffcc00;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .delete {
+  border: none;
   background: #cc0000;
 }
 
 .delete:hover {
   background: #e60000;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .bucket-delete {
@@ -295,15 +308,11 @@ button {
   float: right;
 }
 
-.bucket-delete {
-  font-size: 10px;
-  margin-top: 35px;
-  font-family: "Roboto", sans-serif;
-  background-color: #cc0000;
-  float: right;
+.bucket-delete:hover {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-button.create-bucket-delete {
+button.create-bucket-button {
   font-size: 12px;
   margin-left: 120px;
   margin-top: 50px;
@@ -312,9 +321,122 @@ button.create-bucket-delete {
   padding: 20px 30px;
 }
 
-button.create-bucket-delete:hover {
+button.create-bucket-button:hover {
   background: #4CAF50;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+/* FRIENDS PAGE */
+
+.friends-background {
+  background: #E6E6E6;
+  height: calc(100vh - 151px);
+}
+
+.friends-list-sidebar {
+  height: calc(100vh - 151px);
+  background: #b3b3b3; 
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.search-friends {
+  height: calc(100vh - 151px);
+  background: #e6e6e6;
+}
+
+.search-friends.form {
+  width: calc(100vh - 151px);
+  box-shadow: none;
+}
+
+.form .friend-search-field {
+  margin-top: 250px;
+  height: 100px;
+  color: #909090;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.glyphicon.glyphicon-search {
+  font-size: 25px;
+  opacity: 0.5;
+}
+
+
+.friends-list-title {
+  margin: 30px 0px;
+  width: 100%;
+  background: #e6e6e6;
+  padding: 30px 0px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2C3E50;
+  opacity: 0.80;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.friends-scroll {
+  width: 100%;
+  padding: 0px;
+  overflow-y: scroll;
+  height: calc(100vh - 296px);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: bold;*/
+}
+
+.individual-friend {
+  font-size: 15px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  padding: 25px 0px 25px 80px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+}
+
+/* FRIENDS LIST BUTTONS */
+
+.invite {
+  border: none;
+  margin: 0 10px 0 5px;
+  border-color: transparent;
+  background: #008ae6;
+  float: right;
+}
+
+.invite:hover {
+  background:  #0099ff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.delete-friend {
+  border: none;
+  border-color: transparent;
+  background: #cc0000;
+  float: right;
+}
+
+.delete-friend:hover {
+  background: #e60000;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.glyphicon.glyphicon-send {
+  color: #e6e6e6;
+}
+
+.glyphicon.glyphicon-remove-circle.friends {
+  color: #e6e6e6;
+}
+
+
 
 /* REGISTRATION PAGE */
 
@@ -468,3 +590,37 @@ button.create-bucket-delete:hover {
 .setting-img .form {
   margin: auto;
 }
+
+p.settings-label-username-fail {
+  color: #cc0000;
+  font-family: "Roboto", sans-serif;
+  opacity: 1.0;
+  font-weight: bold;
+}
+
+p.settings-label-username-success {
+  color: #4CAF50;
+  font-family: "Roboto", sans-serif;
+  opacity: 1.0;
+  font-weight: bold;
+}
+
+p.settings-label-password-fail {
+  color: #cc0000;
+  font-family: "Roboto", sans-serif;
+  opacity: 1.0;
+  font-weight: bold;
+}
+
+p.settings-label-password-success {
+  color: #4CAF50;
+  font-family: "Roboto", sans-serif;
+  opacity: 1.0;
+  font-weight: bold;
+}
+
+
+
+
+
+

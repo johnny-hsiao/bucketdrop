@@ -4,16 +4,80 @@
       <div class="form">
         <form class="settings-form">
           <h2 class="settings-title">SETTINGS</h2>
-          <label class="settings-label">Update Username</label>
-          <input type="text" placeholder="Username"/>
-          <label class="settings-label">Update Password</label>
-          <input type="text" placeholder="Old password"/>
-          <input type="text" placeholder="New password"/>
-          <input type="password" placeholder="Confirm password"/>
-          <button>update</button>
+
+          <!-- USERNAME LABEL -->
+          <% if session[:settings_username_update] == "SUCCESS!" %>
+
+            <p class="settings-label-username-success"><%= session[:settings_username_update] %></p>
+            <label class="settings-label">Username</label> <span class="glyphicon glyphicon-ok-circle"></span>
+
+          <% elsif session[:settings_username_update] == "USERNAME IS TAKEN" %>
+
+            <p class="settings-label-username-fail"><%= session[:settings_username_update] %></p>
+            <label class="settings-label">Username</label> <span class="glyphicon glyphicon-remove-circle"></span>
+
+          <% else %>
+            <label class="settings-label">Username</label>
+          <% end %>
+
+          <input type="text" placeholder="Username" value="<%= @user.username %>" id="username-text-field" />
+          
+          <!-- PASSWORD LABEL -->
+          <% if session[:settings_password_update] %>
+            <% if session[:settings_password_update] == "SUCCESS!" %>
+              <!-- success message for password -->
+              <p class="settings-label-password-success"><%= session[:settings_password_update] %></p>
+              <label class="settings-label">Password</label> <span class="glyphicon glyphicon-ok-circle"></span>
+            <% else %>
+              <!-- failed message for password -->
+              <p class="settings-label-password-fail"><%= session[:settings_password_update] %></p>
+              <label class="settings-label">Password</label> <span class="glyphicon glyphicon-remove-circle"></span>
+            <% end %>
+
+          <% else %>
+            <label class="settings-label">Password</label>
+          <% end %>
+
+          <input type="password" placeholder="Old password" id="old-password-text-field" />
+          <input type="password" placeholder="New password" id="new-password-text-field" />
+          <input type="password" placeholder="Confirm password" id="confirmed-password-text-field" />
+          <button class="btn_submit-settings">update</button>
+
         </form>
       </div>
     </div>
   
   </div>  
 </div>
+
+<% reset_session_settings %>
+
+
+
+
+<script>
+  $('.btn_submit-settings').click(function(ev){
+
+    ev.preventDefault();
+
+    var username = $(this).closest('.settings-form').children('#username-text-field').val();
+    var oldPassword = $(this).closest('.settings-form').children('#old-password-text-field').val();
+    var newPassword = $(this).closest('.settings-form').children('#new-password-text-field').val();
+    var confirmedPassword = $(this).closest('.settings-form').children('#confirmed-password-text-field').val();
+    
+    var formdata = {
+      "username": username,
+      "old_password": oldPassword,
+      "new_password": newPassword,
+      "confirmed_password": confirmedPassword
+    };
+
+    console.log(formdata);
+
+    $.ajax(`/settings/update_username_password`, {method: 'PUT', data: formdata})
+      .done(function(result){
+        window.location.href = "/settings";
+    });
+  });
+
+</script>

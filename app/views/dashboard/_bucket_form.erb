@@ -1,6 +1,6 @@
 <!-- bucket name -->
-<div class="input-group bucketlist-title">
-  <input type="text" class="form-control bucket-title" aria-label="Title" value="<%= bucket.name %>" readonly/>
+<div class="input-group item-field bucketlist-title">
+  <input type="text" class="form-control bucket-title submit_on_enter" name="PUT" data-method="put" data-path="bucket_title" aria-label="Title" value="<%= bucket.name %>" />
 </div>
 
 <!-- new item input field -->
@@ -14,7 +14,7 @@
 
 
 
-<% bucket.items.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.each do |item| %>    
+<% bucket.items.to_a.sort { |a,b| b.updated_at <=> a.updated_at }.sort { |a,b| b.status <=> a.status }.each do |item| %>    
   <div class="input-group item-field" data-id=<%=item.id%>>
     
 
@@ -60,5 +60,5 @@
 
 <!-- delete bucket button -->
 <div class="bucklist-footer">
-  <button class="bucket-delete">DELETE BUCKET</button>
+  <button class="bucket-delete btn_submit" name="DELETE" data-method="delete" data-path="delete_bucket">DELETE BUCKET</button>
 </div>

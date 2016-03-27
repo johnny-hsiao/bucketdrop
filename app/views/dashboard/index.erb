@@ -4,14 +4,14 @@
 
 
     <!-- create a new bucket form -->
-    <form class="create-bucket-form" action="/items" method="post">
+    <form class="create-bucket-form" action="/buckets/new" method="post">
 
       <div class="input-group create-bucketlist-title">
-        <input type="text" class="form-control bucket-title" aria-label="Title" placeholder="BUCKET TITLE HERE" />
+        <input type="text" class="form-control bucket-title" name="name" aria-label="Title" placeholder="BUCKET TITLE HERE" />
       </div>
       
       <div class="create-bucklist-footer">
-        <button class="create-bucket-delete">CREATE BUCKET</button>
+        <button class="create-bucket-button">CREATE BUCKET</button>
       </div>
 
     </form>

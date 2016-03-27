@@ -9,7 +9,7 @@
       <div class="form">
         <form class="login-form" action="/login", method="post">
           <% if session[:login_error] %>
-            <p><%= session[:login_error] %></p>
+            <p class="login-error"><%= session[:login_error] %></p>
           <% end %>
           <input type="text" name="username" placeholder="Username"/>
           <input type="password" name="password" placeholder="Password"/>
@@ -20,3 +20,5 @@
     </div>
   </div>
 </div>
+
+<% session[:login_error] = nil %>
