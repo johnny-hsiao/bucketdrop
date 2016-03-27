@@ -18,3 +18,7 @@ end
 get '/redirection' do
   erb :'register/redirection'
 end
+
+get '/friends' do
+  erb :'friends/index'
+end
