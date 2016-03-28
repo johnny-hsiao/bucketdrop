@@ -3,20 +3,17 @@
 
     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-m-4 col-m-offset-4 registration-page">
 
-      
       <div class="form">
         <form class="registration-form" action='/signup' method='post'>
           <h2 class="registration-title">SIGN UP</h2>
 
           <% if @user && @user.errors.any? %>
-            <div>
-              <strong>Some issues with your entries, please fix them:</strong>
-              <ul>
-                <% @user.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-           </div>
+            <div class="signup-errors-message">* Some issues with your entries, please fix them:</div>
+            <ul class="signup-errors-ul">
+              <% @user.errors.full_messages.each do |message| %>
+                <li class="signup-errors-li"><%= message %></li>
+              <% end %>
+            </ul>
 
           <% end %>
           <input type="text" name="first_name" placeholder="First name" value="<%= @user.first_name %>" />
@@ -26,6 +23,7 @@
           <input type="password" name="password" placeholder="Password"/>
           <input type="password" name="confirm_password" placeholder="Confirm password"/>
           <button>login</button>
+          <p class="message">Already registered? <a style="color: white;" href="/">Sign in</a></p>
         </form>
       </div>
     </div>

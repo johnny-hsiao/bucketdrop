@@ -31,7 +31,6 @@ get '/signup/form' do
 end
 
 post '/signup' do
-  # binding.pry
   @user = User.new(
     first_name: params[:first_name], 
     last_name: params[:last_name], 
@@ -41,7 +40,7 @@ post '/signup' do
   )
   if params[:password] == params[:confirm_password]
     if @user.save
-      redirect :'/signup_success'
+      redirect :'/signup/success'
     else
       session[:signup_error_missing_fields] = "Missing required fields"
       erb :signup
@@ -53,7 +52,7 @@ post '/signup' do
   end
 end
 
-get '/signup_success' do
+get '/signup/success' do
   erb :signup_success
 end
 
@@ -62,28 +61,6 @@ get '/dashboard' do
   @new = params["name"]
   erb :'dashboard/index'
 end
-
-post '/buckets/new' do
-  check_user
-  @bucket = Bucket.new(name: params[:name])
-  @bucket.user = @user
-  if @bucket.save
-    redirect :'/dashboard'
-  end
-end
-
-post '/buckets/update' do
-end
-
-delete '/buckets/delete' do
-
-  check_user
-  get_bucket
-  @bucket.destroy
-
-  redirect :'/dashboard'
-end
-
 
 put '/items/update' do
   check_user
@@ -112,18 +89,35 @@ post '/items/new' do
   end
 end
 
-
 delete '/items/delete' do
-  # binding.pry
   check_user
   get_item
   @item.destroy
   redirect :'/dashboard'
-
 end
 
 
-### bucket requests ###
+### BUCKET REQUESTS ###
+post '/buckets/new' do
+  check_user
+  @bucket = Bucket.new(name: params[:name])
+  @bucket.user = @user
+  @bucket.save
+  redirect :'/dashboard'
+end
+
+post '/buckets/update' do
+end
+
+delete '/buckets/delete' do
+
+  check_user
+  get_bucket
+  @bucket.destroy
+
+  redirect :'/dashboard'
+end
+
 put '/items/bucket_title' do
   check_user
   get_bucket
@@ -152,7 +146,15 @@ put '/settings/update_username_password' do
 end
 
 
+### FRIENDS REQUESTS ###
 get '/friends' do
+  check_user
+  @friendlist = %w[LEONARDO DONATELLO MICHAELANGELO RAFAEL SPLINTER APRIL NOELLE YOU]
   erb :'friends/index'
+end
+
+post '/friends/search' do
+  @result = params[:name].upcase
+  erb :'friends/search_redirect'
 end
 

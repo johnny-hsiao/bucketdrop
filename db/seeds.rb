@@ -5,14 +5,21 @@ SUPERUSERS = [{
     last_name: "Hsiao",
     username: "admin",
     email: "johnny@example.com",
-    password: "admin"
+    password: "admin123"
   },
   {
     first_name: "Trevor",
     last_name: "Guile",
     username: "trevor",
     email: "trevor@example.com",
-    password: "admin"
+    password: "admin123"
+  },
+  {
+    first_name: "Barack",
+    last_name: "Obama",
+    username: "obama",
+    email: "obama@example.com",
+    password: "admin123"
   },
 ]
 
@@ -25,7 +32,7 @@ SUPERUSERS.size.times do |i|
     password: SUPERUSERS[i][:password]
   )
 
-  bucket = admin.buckets.create(name: "travel")
+  bucket = admin.buckets.create(name: "Travel")
 
 
   5.times do
@@ -34,7 +41,7 @@ SUPERUSERS.size.times do |i|
     bucket.items << item
   end
 
-  bucket2 = admin.buckets.create(name: "see color")
+  bucket2 = admin.buckets.create(name: "See Colors")
 
 
   5.times do
@@ -43,7 +50,7 @@ SUPERUSERS.size.times do |i|
     bucket2.items << item
   end
 
-  bucket3 = admin.buckets.create(name: "visit universities")
+  bucket3 = admin.buckets.create(name: "Visit Universities")
 
 
   5.times do

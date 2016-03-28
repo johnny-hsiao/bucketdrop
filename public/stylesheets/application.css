@@ -82,6 +82,7 @@ button {
   margin-right: 0px;
 }
 
+
 /* NAV BAR & FOOTER */
 
 .navbar-inverse {
@@ -110,6 +111,7 @@ button {
   font-size: 110%;
   color: #ecf0f1;
 }
+
 
 /* HOME PAGE */
 
@@ -167,6 +169,7 @@ p.login-error {
   padding-bottom: 15px;
 }
 
+
 /* DASHBOARD PAGE */
 
  .dashboard-background {
@@ -176,6 +179,7 @@ p.login-error {
 .dashboard-page {
   margin-top: 80px;
 }
+
 
 /* BUCKETS */
 
@@ -267,6 +271,7 @@ p.login-error {
   margin-top: 10px;
 }
 
+
 /*BUCKET FORM BUTTONS */
 
 .complete {
@@ -325,6 +330,7 @@ button.create-bucket-button:hover {
   background: #4CAF50;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 
 /* FRIENDS PAGE */
 
@@ -401,6 +407,7 @@ button.create-bucket-button:hover {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.24);
 }
 
+
 /* FRIENDS LIST BUTTONS */
 
 .invite {
@@ -435,7 +442,6 @@ button.create-bucket-button:hover {
 .glyphicon.glyphicon-remove-circle.friends {
   color: #e6e6e6;
 }
-
 
 
 /* REGISTRATION PAGE */
@@ -494,6 +500,29 @@ button.create-bucket-button:hover {
   -o-background-size: cover;
   background-size: cover;  
 }
+
+.signup-errors-message {
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  color: #2C3E50;
+  margin-bottom: 13px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.signup-errors-ul {
+  font-family: "Roboto", sans-serif;
+  color: red;
+  list-style: none;
+  text-align: left;
+  padding-left: 0px;
+  margin-bottom: 40px;
+}
+
+.signup-errors-li {
+  padding-bottom: 7px;
+}
+
 
 /* RE-DIRECTION PAGE */
 
@@ -618,9 +647,3 @@ p.settings-label-password-success {
   opacity: 1.0;
   font-weight: bold;
 }
-
-
-
-
-
-
