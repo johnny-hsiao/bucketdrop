@@ -15,18 +15,22 @@ App developed by Trevor Guile and Johnny Hsiao
 3. Visit `http://localhost:3000/` in your browser
 
 ```
+```
 -Register/sign in
 -Add bucket to start a new list
 -Add item to populate each bucket
 -Click on the buttons next to the items to edit, update and delete
+```
 
 
 ### Tech stack
 
+```
 -Ruby with Sinatra
 -HTML5/CSS3
 -Bootstrap
 -Sqlite3
+```
 
 
 ### Screenshots
