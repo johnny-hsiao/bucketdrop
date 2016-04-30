@@ -1,10 +1,9 @@
-===========
 Bucket Drop
 ===========
 
 A single page app for organizing your bucket list. 
 
-App developed by Trevor Guile and Johnny Hsiao
+App developed by Trevor Guile and Johnny Hsiao.
 
 
 ### Usage
